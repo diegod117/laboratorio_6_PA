@@ -30,3 +30,18 @@ def listar_tiendas(request):
     """Devuelve la lista completa de tiendas."""
     return Response(tiendas)
 
+
+@api_view(['POST'])
+def crear_tienda(request):
+    """Recibe los datos del nuevo registro desde request.data, le asigna un id, lo agrega a la lista y responde con status 201."""
+    nuevo_id = max([t['id'] for t in tiendas], default=0) + 1
+    nueva_tienda = {
+        'id': nuevo_id,
+        'nombre': request.data.get('nombre'),
+        'ciudad': request.data.get('ciudad'),
+        'sitio_web': request.data.get('sitio_web'),
+    }
+    tiendas.append(nueva_tienda)
+    return Response(nueva_tienda, status=status.HTTP_201_CREATED)
+
+
