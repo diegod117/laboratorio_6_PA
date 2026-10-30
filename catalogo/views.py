@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -34,4 +35,18 @@ ofertas = [
 @api_view(['GET'])
 def lista_ofertas(request):
     return Response(ofertas)
+
+
+@api_view(['POST'])
+def crear_oferta(request):
+    nuevo_id = max(oferta["id"] for oferta in ofertas) + 1
+    nueva_oferta = {
+        "id": nuevo_id,
+        "producto": request.data["producto"],
+        "tienda": request.data["tienda"],
+        "precio": request.data["precio"],
+        "stock": request.data["stock"],
+    }
+    ofertas.append(nueva_oferta)
+    return Response(nueva_oferta, status=status.HTTP_201_CREATED)
 # ===== Fin Oferta (Johann) =====
