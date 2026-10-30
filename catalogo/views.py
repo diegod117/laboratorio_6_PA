@@ -29,4 +29,9 @@ ofertas = [
         "stock": 0,
     },
 ]
+
+
+@api_view(['GET'])
+def lista_ofertas(request):
+    return Response(ofertas)
 # ===== Fin Oferta (Johann) =====
