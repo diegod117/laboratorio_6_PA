@@ -21,3 +21,17 @@ productos = [
 def lista_productos(request):
     """Devuelve la lista completa de productos."""
     return Response(productos)
+
+
+@api_view(['POST'])
+def crear_producto(request):
+    """Recibe un producto nuevo en request.data, le asigna un id y lo agrega a la lista."""
+    nuevo_id = max((p['id'] for p in productos), default=0) + 1
+    nuevo = {
+        'id': nuevo_id,
+        'nombre': request.data.get('nombre'),
+        'expansion': request.data.get('expansion'),
+        'tipo': request.data.get('tipo'),
+    }
+    productos.append(nuevo)
+    return Response(nuevo, status=201)
