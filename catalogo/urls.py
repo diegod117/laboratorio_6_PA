@@ -1,9 +1,19 @@
-from django.urls import path    
-
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    # Producto
+    # ===== Oferta (Johann) =====
+    path('ofertas/', views.lista_ofertas),
+    path('ofertas/crear/', views.crear_oferta),
+    # ===== Fin Oferta (Johann) =====
+
+    # ===== Tienda (Martín) =====
+    path('tiendas/', views.listar_tiendas, name='listar_tiendas'),
+    path('tiendas/crear/', views.crear_tienda, name='crear_tienda'),
+    # ===== Fin Tienda (Martín) =====
+
+    # ===== Producto (Diego) =====
     path('productos/', views.lista_productos, name='lista_productos'),
     path('productos/crear/', views.crear_producto, name='crear_producto'),
+    # ===== Fin Producto (Diego) =====
 ]
