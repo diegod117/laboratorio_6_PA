@@ -7,9 +7,9 @@ Proyecto del Laboratorio 6 de Programación de Aplicaciones (Django REST Framewo
 
 | Recurso  | Campos                                   | Responsable |
 |----------|------------------------------------------|-------------|
-| Tienda   | id, nombre, ciudad, sitio_web            | por asignar |
+| Tienda   | id, nombre, ciudad, sitio_web            | Martin      |
 | Producto | id, nombre, expansion, tipo              | Diego       |
-| Oferta   | id, producto, tienda, precio, stock      | por asignar |
+| Oferta   | id, producto, tienda, precio, stock      | Johann      |
 
 ## Cómo correr el proyecto
 
