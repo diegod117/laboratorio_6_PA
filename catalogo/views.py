@@ -1,6 +1,5 @@
-from django.http import Http404
 from django.shortcuts import render
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -57,46 +56,10 @@ def crear_oferta(request):
 
 
 # ===== Tienda (Martín) =====
-class TiendaList(APIView):
-    """Lista todas las tiendas o crea una nueva tienda persistente."""
-    def get(self, request):
-        tiendas = Tienda.objects.all()
-        serializer = TiendaSerializer(tiendas, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = TiendaSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class TiendaDetail(APIView):
-    """Recupera, actualiza o elimina una tienda por su id."""
-    def get_object(self, pk):
-        try:
-            return Tienda.objects.get(pk=pk)
-        except Tienda.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk):
-        tienda = self.get_object(pk)
-        serializer = TiendaSerializer(tienda)
-        return Response(serializer.data)
-
-    def put(self, request, pk):
-        tienda = self.get_object(pk)
-        serializer = TiendaSerializer(tienda, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, pk):
-        tienda = self.get_object(pk)
-        tienda.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+class TiendaViewSet(viewsets.ModelViewSet):
+    """ViewSet que provee el CRUD completo para Tienda."""
+    queryset = Tienda.objects.all()
+    serializer_class = TiendaSerializer
 # ===== Fin Tienda (Martín) =====
 
 # ===== Producto (Diego) =====
