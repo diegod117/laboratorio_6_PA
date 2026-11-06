@@ -3,17 +3,17 @@ from rest_framework.routers import DefaultRouter
 from . import views
 
 router = DefaultRouter()
+
+# ===== Oferta (Johann) =====
+router.register(r'ofertas', views.OfertaViewSet)
+# ===== Fin Oferta (Johann) =====
+
 router.register(r'tiendas', views.TiendaViewSet, basename='tienda')
 
 urlpatterns = [
-    # ===== Router Tienda (Martín) =====
+    # ===== Router compartido (Tienda y Oferta) =====
     path('', include(router.urls)),
-    # ===== Fin Router Tienda (Martín) =====
-
-    # ===== Oferta (Johann) =====
-    path('ofertas/', views.lista_ofertas),
-    path('ofertas/crear/', views.crear_oferta),
-    # ===== Fin Oferta (Johann) =====
+    # ===== Fin Router compartido =====
 
     # ===== Producto (Diego) =====
     path('productos/', views.lista_productos, name='lista_productos'),
