@@ -13,7 +13,6 @@ urlpatterns = [
     # ===== Fin Tienda (Martín) =====
 
     # ===== Producto (Diego) =====
-    path('productos/', views.lista_productos, name='lista_productos'),
-    path('productos/crear/', views.crear_producto, name='crear_producto'),
+    path('productos/', views.ProductoList.as_view(), name='producto-list'),
     # ===== Fin Producto (Diego) =====
 ]
