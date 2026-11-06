@@ -10,13 +10,12 @@ router.register(r'ofertas', views.OfertaViewSet)
 
 router.register(r'tiendas', views.TiendaViewSet, basename='tienda')
 
+# ===== Producto (Diego) =====
+router.register(r'productos', views.ProductoViewSet, basename='producto')
+# ===== Fin Producto (Diego) =====
+
 urlpatterns = [
-    # ===== Router compartido (Tienda y Oferta) =====
+    # ===== Router compartido (Tienda, Oferta y Producto) =====
     path('', include(router.urls)),
     # ===== Fin Router compartido =====
-
-    # ===== Producto (Diego) =====
-    path('productos/', views.lista_productos, name='lista_productos'),
-    path('productos/crear/', views.crear_producto, name='crear_producto'),
-    # ===== Fin Producto (Diego) =====
 ]
