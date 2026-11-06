@@ -2,8 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-        # ===== Oferta (Johann) =====
+    # ===== Oferta (Johann) =====
     path('ofertas/', views.OfertaList.as_view()),
+    path('ofertas/<int:pk>/', views.OfertaDetail.as_view()),
     # ===== Fin Oferta (Johann) =====
 
     # ===== Tienda (Martín) =====

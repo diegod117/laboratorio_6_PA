@@ -22,25 +22,32 @@ class OfertaList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-# ===== Fin Oferta (Johann) =====
-
-@api_view(['GET'])
-def lista_ofertas(request):
-    return Response(ofertas)
 
 
-@api_view(['POST'])
-def crear_oferta(request):
-    nuevo_id = max(oferta["id"] for oferta in ofertas) + 1
-    nueva_oferta = {
-        "id": nuevo_id,
-        "producto": request.data["producto"],
-        "tienda": request.data["tienda"],
-        "precio": request.data["precio"],
-        "stock": request.data["stock"],
-    }
-    ofertas.append(nueva_oferta)
-    return Response(nueva_oferta, status=status.HTTP_201_CREATED)
+class OfertaDetail(APIView):
+    def get_object(self, pk):
+        try:
+            return Oferta.objects.get(pk=pk)
+        except Oferta.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        oferta = self.get_object(pk)
+        serializer = OfertaSerializer(oferta)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        oferta = self.get_object(pk)
+        serializer = OfertaSerializer(oferta, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        oferta = self.get_object(pk)
+        oferta.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 # ===== Fin Oferta (Johann) =====
 
 
