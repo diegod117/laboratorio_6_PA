@@ -3,11 +3,8 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Oferta, Tienda
-from .serializers import OfertaSerializer, TiendaSerializer
-
-from .models import Producto
-from .serializers import ProductoSerializer
+from .models import Oferta, Producto, Tienda
+from .serializers import OfertaSerializer, ProductoSerializer, TiendaSerializer
 
 # Create your views here.
 
