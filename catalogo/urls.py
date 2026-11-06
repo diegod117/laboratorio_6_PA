@@ -8,8 +8,7 @@ urlpatterns = [
     # ===== Fin Oferta (Johann) =====
 
     # ===== Tienda (Martín) =====
-    path('tiendas/', views.listar_tiendas, name='listar_tiendas'),
-    path('tiendas/crear/', views.crear_tienda, name='crear_tienda'),
+    path('tiendas/', views.TiendaList.as_view(), name='tienda_list'),
     # ===== Fin Tienda (Martín) =====
 
     # ===== Producto (Diego) =====
