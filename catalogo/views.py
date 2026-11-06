@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from .models import Tienda
+from .serializers import TiendaSerializer
 
 # Create your views here.
 
@@ -53,47 +56,10 @@ def crear_oferta(request):
 
 
 # ===== Tienda (Martín) =====
-# Datos de ejemplo para el recurso Tienda (Paso 2)
-tiendas = [
-    {
-        "id": 1,
-        "nombre": "Magic Sur Chile",
-        "ciudad": "Santiago",
-        "sitio_web": "https://magicsur.cl"
-    },
-    {
-        "id": 2,
-        "nombre": "Weplay Store",
-        "ciudad": "Viña del Mar",
-        "sitio_web": "https://weplay.cl"
-    },
-    {
-        "id": 3,
-        "nombre": "Sniper Games",
-        "ciudad": "Concepción",
-        "sitio_web": "https://snipergames.cl"
-    }
-]
-
-
-@api_view(['GET'])
-def listar_tiendas(request):
-    """Devuelve la lista completa de tiendas."""
-    return Response(tiendas)
-
-
-@api_view(['POST'])
-def crear_tienda(request):
-    """Recibe los datos del nuevo registro desde request.data, le asigna un id, lo agrega a la lista y responde con status 201."""
-    nuevo_id = max([t['id'] for t in tiendas], default=0) + 1
-    nueva_tienda = {
-        'id': nuevo_id,
-        'nombre': request.data.get('nombre'),
-        'ciudad': request.data.get('ciudad'),
-        'sitio_web': request.data.get('sitio_web'),
-    }
-    tiendas.append(nueva_tienda)
-    return Response(nueva_tienda, status=status.HTTP_201_CREATED)
+class TiendaViewSet(viewsets.ModelViewSet):
+    """ViewSet que provee el CRUD completo para Tienda."""
+    queryset = Tienda.objects.all()
+    serializer_class = TiendaSerializer
 # ===== Fin Tienda (Martín) =====
 
 # ===== Producto (Diego) =====
