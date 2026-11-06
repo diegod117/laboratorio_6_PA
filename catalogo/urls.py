@@ -9,6 +9,7 @@ urlpatterns = [
 
     # ===== Tienda (Martín) =====
     path('tiendas/', views.TiendaList.as_view(), name='tienda_list'),
+    path('tiendas/<int:pk>/', views.TiendaDetail.as_view(), name='tienda_detail'),
     # ===== Fin Tienda (Martín) =====
 
     # ===== Producto (Diego) =====
