@@ -2,35 +2,27 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from django.http import Http404
+from rest_framework.views import APIView
+from .models import Oferta
+from .serializers import OfertaSerializer
 # Create your views here.
 
 
 # ===== Oferta (Johann) =====
-ofertas = [
-    {
-        "id": 1,
-        "producto": "Booster Box Escarlata y Púrpura 151",
-        "tienda": "Pokemon Chile Store",
-        "precio": 129990,
-        "stock": 8,
-    },
-    {
-        "id": 2,
-        "producto": "Elite Trainer Box Fuerzas Temporales",
-        "tienda": "Zona TCG",
-        "precio": 54990,
-        "stock": 15,
-    },
-    {
-        "id": 3,
-        "producto": "Charizard ex Obsidiana Llameante",
-        "tienda": "Mundo Cartas Santiago",
-        "precio": 24990,
-        "stock": 0,
-    },
-]
+class OfertaList(APIView):
+    def get(self, request):
+        ofertas = Oferta.objects.all()
+        serializer = OfertaSerializer(ofertas, many=True)
+        return Response(serializer.data)
 
+    def post(self, request):
+        serializer = OfertaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# ===== Fin Oferta (Johann) =====
 
 @api_view(['GET'])
 def lista_ofertas(request):
