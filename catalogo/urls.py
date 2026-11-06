@@ -8,16 +8,15 @@ router = DefaultRouter()
 router.register(r'ofertas', views.OfertaViewSet)
 # ===== Fin Oferta (Johann) =====
 
+router.register(r'tiendas', views.TiendaViewSet, basename='tienda')
+
 urlpatterns = [
-    # ===== Tienda (Martín) =====
-    path('tiendas/', views.listar_tiendas, name='listar_tiendas'),
-    path('tiendas/crear/', views.crear_tienda, name='crear_tienda'),
-    # ===== Fin Tienda (Martín) =====
+    # ===== Router compartido (Tienda y Oferta) =====
+    path('', include(router.urls)),
+    # ===== Fin Router compartido =====
 
     # ===== Producto (Diego) =====
     path('productos/', views.lista_productos, name='lista_productos'),
     path('productos/crear/', views.crear_producto, name='crear_producto'),
     # ===== Fin Producto (Diego) =====
-
-    path('', include(router.urls)),
 ]
