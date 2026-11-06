@@ -1,5 +1,14 @@
-from django.urls import path
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+
 from . import views
+
+# Router compartido por el grupo: cada integrante registra su ViewSet
+# con un prefijo de URL distinto para que no choquen las rutas.
+router = DefaultRouter()
+# ===== Producto (Diego) =====
+router.register(r'productos', views.ProductoViewSet, basename='producto')
+# ===== Fin Producto (Diego) =====
 
 urlpatterns = [
     # ===== Oferta (Johann) =====
@@ -12,8 +21,6 @@ urlpatterns = [
     path('tiendas/crear/', views.crear_tienda, name='crear_tienda'),
     # ===== Fin Tienda (Martín) =====
 
-    # ===== Producto (Diego) =====
-    path('productos/', views.ProductoList.as_view(), name='producto-list'),
-    path('productos/<int:pk>/', views.ProductoDetail.as_view(), name='producto-detail'),
-    # ===== Fin Producto (Diego) =====
+    # Rutas generadas por el router (productos/, productos/<pk>/ y la raíz api/)
+    path('', include(router.urls)),
 ]
