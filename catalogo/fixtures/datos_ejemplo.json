@@ -1,0 +1,42 @@
+[
+  {
+    "model": "catalogo.producto",
+    "pk": 1,
+    "fields": { "nombre": "Elite Trainer Box 151", "expansion": "151", "tipo": "caja" }
+  },
+  {
+    "model": "catalogo.producto",
+    "pk": 2,
+    "fields": { "nombre": "Charizard ex", "expansion": "Llamas Obsidianas", "tipo": "carta" }
+  },
+  {
+    "model": "catalogo.producto",
+    "pk": 3,
+    "fields": { "nombre": "Sobre Evoluciones Prismáticas", "expansion": "Evoluciones Prismáticas", "tipo": "sobre" }
+  },
+  {
+    "model": "catalogo.tienda",
+    "pk": 1,
+    "fields": { "nombre": "Cartas Santiago", "ciudad": "Santiago", "sitio_web": "https://cartas-santiago.example.com" }
+  },
+  {
+    "model": "catalogo.tienda",
+    "pk": 2,
+    "fields": { "nombre": "Poke Valpo", "ciudad": "Valparaíso", "sitio_web": "https://pokevalpo.example.com" }
+  },
+  {
+    "model": "catalogo.oferta",
+    "pk": 1,
+    "fields": { "producto": "Elite Trainer Box 151", "tienda": "Cartas Santiago", "precio": 59990, "stock": 5 }
+  },
+  {
+    "model": "catalogo.oferta",
+    "pk": 2,
+    "fields": { "producto": "Charizard ex", "tienda": "Poke Valpo", "precio": 24990, "stock": 2 }
+  },
+  {
+    "model": "catalogo.oferta",
+    "pk": 3,
+    "fields": { "producto": "Sobre Evoluciones Prismáticas", "tienda": "Cartas Santiago", "precio": 6990, "stock": 30 }
+  }
+]
