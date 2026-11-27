@@ -1,19 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { API_URL } from '../config'
 
-// Datos de prueba: en el paso X1 se reemplazan por fetch a /api/ofertas/
-const ofertasDePrueba = [
-  { id: 1, producto: 'Booster Box 151', tienda: 'Weplay Store', precio: 40000, stock: 10 },
-  { id: 2, producto: 'Charizard ex', tienda: 'Sniper Games', precio: 10000, stock: 30 },
-]
-
 function ListaOfertas() {
-  const [ofertas] = useState(ofertasDePrueba)
+  const [ofertas, setOfertas] = useState([])
+
+  useEffect(() => {
+    fetch(`${API_URL}ofertas/`)
+      .then((res) => res.json())
+      .then(setOfertas)
+  }, [])
 
   return (
     <div>
       <h2>Ofertas</h2>
-      <p>Endpoint: {API_URL}ofertas/</p>
       <ul>
         {ofertas.map((oferta) => (
           <li key={oferta.id}>
