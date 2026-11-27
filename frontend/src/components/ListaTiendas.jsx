@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { API_URL } from '../config'
 
 // Datos de prueba: en el paso X1 se reemplazan por fetch a /api/tiendas/
 const tiendasDePrueba = [
@@ -12,6 +13,7 @@ function ListaTiendas() {
   return (
     <div>
       <h2>Tiendas</h2>
+      <p>Endpoint: {API_URL}tiendas/</p>
       <ul>
         {tiendas.map((tienda) => (
           <li key={tienda.id}>
