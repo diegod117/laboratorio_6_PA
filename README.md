@@ -11,6 +11,24 @@ Proyecto del Laboratorio 6 de Programación de Aplicaciones (Django REST Framewo
 | Producto | id, nombre, expansion, tipo              | Diego       |
 | Oferta   | id, producto, tienda, precio, stock      | Johann      |
 
+## Despliegue
+
+| Parte | URL pública |
+|-------|-------------|
+| Frontend (Vercel) | https://laboratorio-6-pa.vercel.app |
+| Backend (Render) | https://poketodocl-backend.onrender.com |
+| API | https://poketodocl-backend.onrender.com/api/ |
+| Admin de Django | https://poketodocl-backend.onrender.com/admin/ |
+
+Endpoints de la API:
+
+- https://poketodocl-backend.onrender.com/api/ofertas/
+- https://poketodocl-backend.onrender.com/api/tiendas/
+- https://poketodocl-backend.onrender.com/api/productos/
+
+Si el backend está en el plan gratuito de Render, se duerme cuando pasa un
+rato sin visitas, y la primera petición puede tardar cerca de un minuto.
+
 ## Cómo correr el proyecto
 
 ### Clonar el repositorio (macOS y Windows)
