@@ -7,16 +7,23 @@ function App() {
   const [lista, setLista] = useState('ofertas')
 
   return (
-    <div>
-      <h1>PokeTodoCL</h1>
+    <div className="app">
+      <header className="barra">
+        <h1>PokeTodoCL</h1>
+        <p className="lema">Precios y stock de Pokémon TCG en tiendas chilenas</p>
+      </header>
 
-      <button onClick={() => setLista('ofertas')}>Ofertas</button>
-      <button onClick={() => setLista('tiendas')}>Tiendas</button>
-      <button onClick={() => setLista('productos')}>Productos</button>
+      <nav className="pestanas">
+        <button aria-pressed={lista === 'ofertas'} onClick={() => setLista('ofertas')}>Ofertas</button>
+        <button aria-pressed={lista === 'tiendas'} onClick={() => setLista('tiendas')}>Tiendas</button>
+        <button aria-pressed={lista === 'productos'} onClick={() => setLista('productos')}>Productos</button>
+      </nav>
 
-      {lista === 'ofertas' && <ListaOfertas />}
-      {lista === 'tiendas' && <ListaTiendas />}
-      {lista === 'productos' && <ListaProductos />}
+      <main>
+        {lista === 'ofertas' && <ListaOfertas />}
+        {lista === 'tiendas' && <ListaTiendas />}
+        {lista === 'productos' && <ListaProductos />}
+      </main>
     </div>
   )
 }
