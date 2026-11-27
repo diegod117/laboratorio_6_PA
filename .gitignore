@@ -10,3 +10,7 @@ db.sqlite3
 
 # macOS
 .DS_Store
+
+# Archivos estáticos generados por collectstatic
+staticfiles/
+
