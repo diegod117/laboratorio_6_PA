@@ -53,3 +53,52 @@ Si PowerShell bloquea la activación del venv, ejecuta una vez:
 En CMD (Símbolo del sistema) se activa con `venv\Scripts\activate.bat`.
 
 El servidor queda en http://127.0.0.1:8000/
+
+## Frontend (React + Vite)
+
+El frontend está en la carpeta `frontend/` y consume la API del backend.
+
+### Correr el frontend en local
+
+Con el backend corriendo en otra terminal (`python manage.py runserver`):
+
+```bash
+cd frontend
+npm install
+
+# Crear el archivo .env a partir del ejemplo
+cp .env.example .env        # en Windows (PowerShell): copy .env.example .env
+
+npm run dev
+```
+
+El frontend queda en http://localhost:5173/
+
+El archivo `.env` define la URL de la API (debe terminar en `/`):
+
+```
+VITE_API_URL=http://localhost:8000/api/
+```
+
+### Correr las pruebas del frontend
+
+```bash
+cd frontend
+npm test
+```
+
+### Desplegar el frontend en Vercel
+
+1. Entrar a https://vercel.com con la cuenta de GitHub y elegir **Add New → Project**.
+2. Importar este repositorio.
+3. En **Root Directory** elegir `frontend`.
+4. En **Framework Preset** dejar `Vite` (build `npm run build`, salida `dist`).
+5. En **Environment Variables** agregar:
+   - `VITE_API_URL` = `https://poketodocl-backend.onrender.com/api/`
+6. Presionar **Deploy**. Vercel entrega una URL del tipo `https://<proyecto>.vercel.app`.
+7. En Render, en el servicio del backend, agregar esa URL a la variable
+   `CORS_ALLOWED_ORIGINS` (sin `/` al final) y volver a desplegar el backend.
+   Si no se hace, el navegador bloquea las peticiones por CORS.
+
+Cada vez que se cambia `VITE_API_URL` en Vercel hay que hacer **Redeploy**,
+porque Vite pone la variable dentro del código al momento del build.
